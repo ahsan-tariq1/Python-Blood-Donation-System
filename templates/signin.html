@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}  sign-In {% endblock%}
+{% block stylesheet %}
+          <link rel="stylesheet" href="../static/css/sign-up.css" type="text/css">
+{% endblock %}
+{% block body %}
+  <div class="navbar navbar-dark bg-transparent ">
+
+    <div class="navbar-brand " >
+        <a class="link" href="{{ url_for('index') }}">
+        <img class="logo" src="../static/media/icons/logo.png">
+        BDMS
+        </a>
+    </div>
+    <div class="nav-item dropdown ">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="{{ url_for('signin') }}">Sign In</a>
+        <a class="dropdown-item" href="{{ url_for('signup') }}">Sign up</a>
+        <a class="dropdown-item" href="{{ url_for('requestblood') }}">Need Blood</a>
+      </div>
+    </div>
+  </div>
+  <form action="/signin" method="POST">
+    <div class="form-group">
+        <span>{{ error }} </span>
+      <input type="email" class="form-control" name="email" title="We'll never share your email with unauthorized person." id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email address">
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" name="password" id="donor-password" 
+         pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"  title="Password must have UpperCase, LowerCase, Number/SpecialChar and min 8 Chars"
+         placeholder="password" aria-describedby="password" 
+         onclick="document.getElementById('password').innerHTML = 'password must be 8 characters long.'"/>
+        <p id="password"></p>
+    </div>
+    <button type="submit" class="btn btn-primary mysubmit-btn" >Sign In</button>
+  </form>
+  <p id="signin-up-opt"> Don't have an account? <a href="{{ url_for('signup') }}">Sing Up</a> </p>
+
+{% endblock %}

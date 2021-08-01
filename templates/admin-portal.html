@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+    {% block title %}profile{% endblock %}
+    {% block stylesheet %}
+    <link rel="stylesheet" href="../static/css/admin-portal.css">
+        <style>
+        
+        </style>
+    {% endblock %}
+{% block body %}
+
+
+        <div class="navbar navbar-dark bg-transparent ">
+
+            <div class="navbar-brand " >
+                <a style="color:black" class="link" href="{{ url_for('index') }}">
+                    <img class="logo" src="../static/media/icons/logo.png">
+                    BDMS
+                </a>
+            </div>
+            <div class="user">
+                <a style="color: #444444" href="{{ url_for('loggedin') }}"><h5>{{ email }}</h5></a>
+            </div>
+            <div class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle" style="margin-right: 100px" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{{ url_for('drop_session') }}">Sign out</a>
+                <a class="dropdown-item" href="{{ url_for('signup') }}">Sign up</a>
+                <a class="dropdown-item" href="{{ url_for('requestblood') }}">Request Blood</a>
+
+            </div>
+            </div>
+        </div>
+    <a href="{{ url_for('confirmed_signup') }}" target="_blank">
+        <button class="btn btn-primary mysubmit-btn">Add Donor</button></a>
+        {% if (update) %}
+            <div class="container" style="margin:10% 5% 5% 5%">
+                <form action="{{ url_for('adminupdate') }}" class="row" method="POST">
+                    <div class="input-group">
+                      <select class="custom-select " name="email" id="inputGroupSelect04">
+                        <option selected>Choose email...</option>
+                            {% for donor in donors %}
+                            <option >{{ donor[6] }}</option>
+                            {% endfor %}
+                      </select>
+                        </div>
+                    <div class="input-group-append">
+                        <input class="btn btn-primary mysubmit-btn" type="submit" name="adminDelete" value="delete"/>
+                    </div>
+                    <div class="input-group-append">
+                        <input class="btn btn-primary mysubmit-btn" type="submit" name="adminMani" value="manipulate"/>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+{#        #}
+{#            <div class="container" style="margin:5%">#}
+{#                <form action="{{ url_for('displayRecords') }}" method="post" class="row">#}
+{#                    <div class="input-group col">#}
+{#                        <label for="quantity">Quantity</label>#}
+{#                        <input id="quantity" name="quantity" class="form-control " value="20" pattern="[0-9]">#}
+{#                    </div>#}
+{#                    <div class="input-group col">#}
+{#                        <label for="city">City</label>#}
+{#                        <input type="text" class="form-control" name="city" id="city" placeholder="Lahore"#}
+{#                        pattern="[A-Za-z]+" title="only alphabets allowed, minimun length is 3" minlength="3" maxlength="30">#}
+{#                    </div>#}
+{#                    <div class="input-group col" >#}
+{#                      <select class="custom-select" name="bloodgroup" id="inputGroupSelect04" required>#}
+{#                        <option selected >Choose blood Group...</option>#}
+{#                        <option value="A+">A+</option>#}
+{#                        <option value="A-">A-</option>#}
+{#                        <option value="B+">B+</option>#}
+{#                        <option value="B-">B-</option>#}
+{#                        <option value="AB+">AB+</option>#}
+{#                        <option value="AB-">AB-</option>#}
+{#                        <option value="O+">O+</option>#}
+{#                        <option value="O-">O-</option>#}
+{#                          <option value="ALL">ALL</option>#}
+{#                      </select>#}
+{#                      <div  class="input-group-append">#}
+{#                        <input class="btn btn-outline-secondary" type="submit" value="Filter">#}
+{#                      </div>#}
+{#                    </div>#}
+{##}
+{#                </form>#}
+{#            </div>#}
+          {% if (records) %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Gender</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Blood Group</th>
+                        <th scope="col">Phone No.</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Birthdate</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Province</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for donor in donors %}
+
+                    <tr>
+                        <th scope="row">{{ donor[0] }}</th>
+                        <td>{{ donor[1] }} {{ donor[2] }}</td>
+                        <td>{{ donor[4] }}</td>
+                        <td>{{ donor[6] }}</td>
+                        <td>{{ donor[7] }}</td>
+                        <td>{{ donor[5] }}</td>
+                        <td>{{ donor[13] }}</td>
+                        <td>{{ donor[3] }}</td>
+                        <td>{{ donor[8] }}</td>
+                        <td>{{ donor[9] }}</td>
+                        <td>{{ donor[10] }}</td>
+                        <td>{{ donor[11] }}</td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        {% endif %}
+{% endblock %}

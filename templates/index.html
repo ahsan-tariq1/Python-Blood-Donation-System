@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}
+    BDMS
+{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="../static/css/index.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel+Decorative:900&display=swap" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="navbar navbar-dark bg-transparent ">
+        
+      <div class="navbar-brand " >
+          <a class="link" href="{{ url_for('index') }}">
+          <img class="logo" src="../static/media/icons/logo.png">
+          BDMS
+          </a>
+      </div>
+                {% if (loggedin == 'true') %}
+        <div class="user">
+                <a style="color: #444444;text-decoration: none" href="{{ url_for('loggedin') }}"><h5>{{ email }}</h5></a>
+        </div>
+        {% endif %}
+      <div class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{{ url_for('signin') }}">Sign in</a>
+          <a class="dropdown-item" href="{{ url_for('signup') }}">Sign up</a>
+          <a class="dropdown-item" href="{{ url_for('requestblood') }}">Request Blood</a>
+        </div>
+      </div>
+    </div>
+    <slider class="my-slider">
+        <slide>
+          <p><a class="btn btn-dark btn-lg" title="copyright:pngtree.com" role="button" aria-pressed="true" href="{{ url_for('requestblood') }}" target="blank">Request Blood</a></p>
+        </slide>
+        <slide>
+          <p><a class="btn btn-dark btn-lg" title="copyright:pngtree.com" role="button" aria-pressed="true" href="{{ url_for('signin') }}" targe="blank">Sign in</a></p>
+        </slide>
+        <slide>
+          <p><a class="btn btn-dark btn-lg" role="button" title="copyright:pngtree.com" aria-pressed="true" href="{{ url_for('signup') }}" targe="blank">Register As Donor</a></p>
+        </slide>
+    </slider>
+{% endblock %}

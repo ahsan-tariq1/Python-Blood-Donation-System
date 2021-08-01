@@ -1,0 +1,114 @@
+body{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+
+}
+
+.logo
+{
+    width: 20%;
+}
+.navbar
+{
+    position: absolute;
+    width: auto;
+    margin-top: 0px;
+    z-index: 2;
+    align-content: center;    
+
+}
+.navbar-brand
+{
+    margin-right: 0px !important    ;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: xx-large;
+}
+
+.nav-link
+{
+    margin-left:150px;
+}
+.link
+{
+    text-decoration: none;
+}
+a :hover
+{
+    text-decoration: none;
+}
+
+slider
+{
+    margin-top:-66px;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    overflow: hidden;
+    position: absolute;
+   
+}
+
+slider > *
+{
+    position: absolute;;
+    
+    width: 100%;
+    height:100%;
+    animation: slide 12s infinite;
+    overflow: hidden;
+}
+
+slide:nth-child(1)
+{
+    left: 0%;
+    animation-delay: -1s;
+    background-image: url(/static/media/b1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+slide:nth-child(2)
+{
+    animation-delay: 2s;
+    background-image: url(/static/media/b2.jpg);
+    background-size: cover;
+    background-position: center;
+}
+slide:nth-child(3)
+{
+    animation-delay: 6s;
+    background-image: url(/static/media/b3.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+slide  p{
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 70px;
+    margin-top: 20%;
+    margin-left: 40%;
+}
+slider slide p a{
+
+    align-content: center;
+    text-align:center;
+    color:white;
+    background-color: black;
+    border: solid 2px white;
+    border-radius: 20px;
+    
+}
+
+
+@keyframes slide
+{
+    0% { left:100%;width:100% }
+    10% { left:0%; }
+    43.33% { left:0%; }
+    48.33% { left:-100%; width:100%; }
+    48.3301% { left:-100%;width:0% }
+    100%{left:100%;width:0%}
+    
+}

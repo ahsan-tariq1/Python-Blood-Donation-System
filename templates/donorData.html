@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+        
+        {% block title %}my info{% endblock %}
+        {% block stylesheet %}
+            <link rel="stylesheet" href="../static/css/navbar.css" type="text/css">
+        {% endblock %}
+{% block body %}
+    <div class="navbar navbar-dark bg-transparent ">
+
+        <div class="navbar-brand " >
+            <a style="color: black" class="nav-link" href="{{ url_for('index') }}">
+                <img class="logo" src="../static/media/icons/logo.png">
+                BDMS
+            </a>
+        </div>
+        <div class="user">
+            <a style="color: #000000;text-decoration: none" href="{{ url_for('loggedin') }}"><h5>{{ email }}</h5></a>
+        </div>
+        <div class="btn" >
+            <a class="logout bg-dark text-danger nav-link" href="{{ url_for('drop_session') }}">Log Out</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col text-center font-weight-bold" > Name </div>
+            <div class="col text-center  text-capitalized font-weight-bold" >   {{  donorData.split('&')[0] }}  </div>
+        </div>
+        <div class="row">
+            <div class="col text-center font-weight-bold" >Gender</div>
+            <div class="col text-center  text-capitalized font-weight-bold" >   {{  donorData.split('&')[1] }}  </div>
+        </div>
+        <div class="row">
+            <div class="col text-center font-weight-bold" >Phone Number</div>
+            <div class="col text-center font-weight-bold" >  {{  donorData.split('&')[2] }}  </div>
+        </div>
+        <div class="row">
+            <div class="col text-center font-weight-bold" >Email</div>
+            <div class="col text-center font-weight-bold" >  {{  donorData.split('&')[3] }}  </div>
+        </div>
+        <div class="row" >
+            <div class="col text-center font-weight-bold" >Province</div>
+            <div class="col text-center  text-capitalized font-weight-bold" >  {{  donorData.split('&')[6] }}  </div>
+        </div>
+
+        <div class="row">
+            <div class="col text-center font-weight-bold" >Country</div>
+            <div class="col text-center font-weight-bold" >  {{  donorData.split('&')[5] }}  </div>
+        </div>
+        <div class="row">
+            <div class="col text-center font-weight-bold" >City</div>
+            <div class="col text-center text-capitalized font-weight-bold" >  {{  donorData.split('&')[7] }}  </div>
+        </div>
+        <div class="row">
+            <div class="col text-center font-weight-bold" >Donation status</div>
+            <div class="col text-center font-weight-bold" >  {{  donorData.split('&')[8] }}  </div>
+        </div>
+        <div class="row">
+            <div class="col text-center font-weight-bold" >Birthdate</div>
+            <div class="col text-center font-weight-bold" >  {{  donorData.split('&')[9] }}  </div>
+        </div>
+        <div class="row">
+            <div class="col text-center font-weight-bold" >Blood Group</div>
+            <div class="col text-center font-weight-bold" >  {{  donorData.split('&')[4] }}  </div>
+        </div>
+    </div>
+{% endblock %}

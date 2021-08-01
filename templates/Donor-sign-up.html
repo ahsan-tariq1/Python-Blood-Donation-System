@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}  sign-up {% endblock%}
+{% block stylesheet %}
+        <link rel="stylesheet" href="../static/css/sign-up.css" type="text/css">
+{% endblock %}
+{% block body %}
+  <div class="navbar navbar-dark bg-transparent ">
+          
+    <div class="navbar-brand " >
+        <a class="link" href="{{ url_for('index') }}">
+        <img class="logo" src="../static/media/icons/logo.png">
+        BDMS
+        </a>
+    </div>
+    <div class="nav-item dropdown ">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="{{ url_for('signin') }}">Sign in</a>
+        <a class="dropdown-item" href="{{ url_for('signup') }}">Sign up</a>
+        <a class="dropdown-item" href="{{ url_for('requestblood') }}">Request Blood</a>
+      </div>
+    </div>
+  </div>
+
+    {% if email_check=='true' %}
+        <h5 style="text-align: center; width: 100% " class="text-danger">Invalid Email</h5>
+    {% endif %}
+  <form class="my-form" method="POST">
+    <div class="form-group">
+      <input type="email" class="form-control" title="We'll never share your email with unauthorized person." name="email" id="email" aria-describedby="emailHelp" placeholder="email address">
+      
+    </div>
+      {% if email_check=='false' %}
+      <label for="button">Please proceed to email sent to your account.</label>
+        {% endif %}
+    <button type="submit" class="btn btn-primary mysubmit-btn" >Submit</button>
+  </form>
+  <p id='signin-up-opt'>Already have an account? <a href="{{ url_for('signin') }}">Sign In</a></p>
+{% endblock %}

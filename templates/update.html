@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% block title %}Updates{% endblock %}
+    {% block stylesheet %}
+    <link rel="stylesheet" href="../static/css/my-account.css">
+        <link rel="stylesheet" href="../static/css/alert.css" type="text/css">
+ <style>
+ form{
+    margin: 0% 20% 0% 20%;
+    padding: 20px 10px 20px 10px;
+}
+ body{
+     overflow: auto;
+ }
+ </style>
+{% endblock %}
+
+{% block body %}
+
+    {% if invalidEmail=='invalidEmail' %}
+        <div class="alert">
+  <span class="closebtn">&times;</span>
+  <strong>Email Alert!</strong> The Email entered is invalid.
+        </div>
+    {% endif %}
+
+    {% if (update=='update') %}
+        <div class="alert success">
+  <span class="closebtn">&times;</span>
+  <strong>Update success!</strong> Your account info has been updated successfully.
+        </div>
+    {% endif %}
+
+
+    {% if exitEmail=='exitEmail' %}
+        <div class="alert">
+  <span class="closebtn">&times;</span>
+  <strong>Email Alert!</strong> The Email already exit.
+        </div>
+    {% endif %}
+
+
+    {% if phoneFailure=='phoneFailure' %}
+        <div class="alert">
+  <span class="closebtn">&times;</span>
+  <strong>PhoneNo Alert!</strong> Invalid Number.
+        </div>
+    {% endif %}
+
+    {% if cannotUpdate=='cannotUpdate' %}
+        <div class="alert">
+  <span class="closebtn">&times;</span>
+  <strong>Couldn't Update!</strong> Check the information you provided(You have entered the previous information).
+        </div>
+    {% endif %}
+
+    {% if passwordFail=='passwordFail' %}
+        <div class="alert">
+            <span class="closebtn">&times;</span>
+  <strong>Password Alert!</strong> Password couldn't be updated(You have entered the previous password).
+        </div>
+    {% endif %}
+
+        {% if pre_password=='pre_password' %}
+        <div class="alert">
+            <span class="closebtn">&times;</span>
+  <strong>Password Alert!</strong> Your current password is wrong.
+        </div>
+    {% endif %}
+
+    {% if (statusFailure=='statusFailure') %}
+        <div class="alert success">
+  <span class="closebtn">&times;</span>
+  <strong>Sorry!</strong> Your status cannot be updated(You are selecting the previous one).
+        </div>
+    {% endif %}
+
+    {% if (status=='status') %}
+        <div class="alert success">
+  <span class="closebtn">&times;</span>
+  <strong>Status Success!</strong> Your status has been updated.Thanks for cooperation.
+        </div>
+    {% endif %}
+
+
+
+
+
+    <div class="navbar navbar-dark bg-transparent ">
+
+      <div class="navbar-brand " >
+          <a class="nav-link" href="{{ url_for('index') }}">
+              <img class="logo" src="../static/media/icons/logo.png">
+              BDMS
+          </a>
+      </div>
+        {% if updateuser %}
+      <div class="user">
+         <p><a href="{{ url_for('loggedin') }}"><h5>{{ email }}</h5></a></p>
+      </div>
+        {% endif %}
+
+        {% if updateadmin %}
+      <div class="user">
+         <p><a href="{{ url_for('admin') }}"><h5>{{ email }}</h5></a></p>
+      </div>
+        {% endif %}
+      <div class="btn" >
+          <a class="logout bg-dark text-danger nav-link" href="{{ url_for('drop_session') }}">Log Out</a>
+      </div>
+    </div>
+    <form action="/update" method="post">
+      <div class="row">
+        <div class="form-group col ">     
+          <lable>Select option to update your data</lable>
+          <select class="form-control custome-select"  name="check">
+            <option value="phoneNo">PhoneNo</option>
+{#            <option value="email">Email</option>#}
+            <option value="country">Country</option>
+            <option value="province">province</option>
+            <option value="city">City</option>
+          </select>
+        </div>
+        <div class="form-group col" >
+          <label style="margin-bottom: 0;" >Enter appropriate data value</label>
+          <input type="text" class="form-control" name="new_info" required />
+        </div>
+      </div>
+        <button type="submit" class="btn btn-primary mysubmit-btn">Submit</button>
+      </div>
+    </form>
+    <form action="/status" method="POST">
+        <div class="form-group ">     
+          <label>Select True if you have not donated blood in last six months</label>
+          <select class="form-control custome-select"  name="status">
+            <option value="True">True</option>
+            <option value="False">False</option>
+          </select>
+      </div>
+      <button id="form-btn" type="submit" class="btn btn-primary mysubmit-btn">Submit</button>
+    </form>
+    <form action="/updatePassword" method="post">
+        <div class="form-group">
+            <label for="donor-pre-password">Current Password</label>
+        <input type="password" class="form-control" name="pre-password" id="donor-pre-password"
+         pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"  title="Password must have UpperCase, LowerCase, Number/SpecialChar and min 8 Chars"
+         placeholder="password" aria-describedby="password"
+         onclick="document.getElementById('password').innerHTML = 'password must be 8 characters long.'" required />
+        <p id="password"></p>
+    </div>
+        <div class="form-group">
+            <label for="donor-password">New Password</label>
+            <input type="password" class="form-control" name="password" id="donor-password"
+             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"  title="Password must have UpperCase, LowerCase, Number/SpecialChar and min 8 Chars"   placeholder="Password" aria-describedby="password"
+             onkeyup="check();"  title = "password must 8 characters long." required />
+
+        </div>
+        <div class="form-group">
+            <label for="retype-password">Confirm Password</label>
+            <input type="password" class="form-control" name="rtpassword" id="rtpassword"
+             pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"  title="Password must have UpperCase, LowerCase, Number/SpecialChar and min 8 Chars"
+              onkeyup="check();"  placeholder="Password" aria-describedby="password" required />
+            <span id="message"></span>
+        </div>
+    <button id="form-btn" type="submit" class="btn btn-primary mysubmit-btn">Submit</button>
+    </form>
+  <script>
+      function check()
+      {
+          if (document.getElementById('donor-password').value == document.getElementById('rtpassword').value) {
+              document.getElementById('message').style.color = 'green';
+              document.getElementById('message').innerHTML = "passwords matched";
+              document.getElementById('form-btn').disabled = false;
+          } else {
+              document.getElementById('message').style.color = 'red';
+              document.getElementById('message').innerHTML = "passwords do not match";
+              document.getElementById('form-btn').disabled = true;
+          }
+      }
+      var close = document.getElementsByClassName("closebtn");
+  if (close) {
+      var i;
+
+      for (i = 0; i < close.length; i++) {
+          close[i].onclick = function () {
+              var div = this.parentElement;
+              div.style.opacity = "0";
+              setTimeout(function () {
+                  div.style.display = "none";
+              }, 600);
+          }
+      }
+  }
+  </script>
+{% endblock %}

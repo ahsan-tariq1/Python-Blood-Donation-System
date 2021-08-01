@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+    {% block title %}profile{% endblock %}
+    {% block stylesheet %}
+    <link rel="stylesheet" href="../static/css/my-account.css">
+        <style>
+
+        </style>
+    {% endblock %}
+{% block body %}
+
+
+        <div class="navbar navbar-dark bg-transparent ">
+
+            <div class="navbar-brand " >
+                <a  class="link" href="{{ url_for('index') }}">
+                    <img class="logo" src="../static/media/icons/logo.png">
+                    BDMS
+                </a>
+            </div>
+            <div class="user">
+                <a style="color: #444444" href="{{ url_for('loggedin') }}"><h5>{{ email }}</h5></a>
+            </div>
+            <div class="btn" >
+                <a class="logout bg-dark text-danger nav-link" href="{{ url_for('drop_session') }}">Log Out</a>
+            </div>
+        </div>
+
+        <div class="row up-btns justify-content-md-center">
+
+            <form class="col" action="/update" method="get">
+                <button class="btn btn-dark"  type="submit" >Update Data</button>
+            </form>
+
+            <form class="col" action="/showDonorsData" method="post">
+              <input class="btn btn-dark"  type="submit" value="View Data">
+            </form>
+
+            <div class="col sm">
+                <input class="btn btn-dark" onclick="askAgain()" type="submit" value="Delete Data">
+            </div>
+        </div>
+    <script >
+
+    function askAgain(){
+
+        r = confirm('Delete your account?\nThis action is not reversable')
+        if (r) {
+            window.location.replace('{{ url_for('delete') }}');
+        }
+    }
+    </script>
+{% endblock %}
